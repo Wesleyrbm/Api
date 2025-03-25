@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Financeiro</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<div inicio>
+  <h1> APP Finance</h1>
+</div> 
+
+<div class="menu_lista">
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Sobre</a></li>
+    <li><a href="#">Contato</a></li>
+  </ul>
+
+</div>
+
+<body>
+  <div id="app"></div> <!-- Vue irá injetar o conteúdo aqui -->
+  
+  <!-- CDN do Vue.js (carregar primeiro) -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  
+  <!-- CDN do Axios -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  
+  <!-- Arquivo JavaScript com Vue (carregar depois do Vue.js) -->
+  <script src="App.js"></script>  <!-- Certifique-se de que esse arquivo está no local correto -->
+</body>
+</html>
