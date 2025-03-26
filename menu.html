@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu - Painel Financeiro</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+  <header>
+    <h1>Menu - APP Finance</h1>
+  </header>
+
+  <nav class="menu_lista">
+    <ul>
+      <li><a href="index.html">Início</a></li>
+      <li><a href="dinheiro.html">É Dinheiro</a></li>
+      <li><a href="contato.html">Contato</a></li>
+    </ul>
+  </nav>
+
+  <section class="home" id="dinheiro">
+    <div class="container">
+      <h2>Conversor de Moedas</h2>
+      <div id="app">
+        <p>Status: <strong>{{ status }}</strong></p>
+
+        <label>Moeda de Origem:</label>
+        <select v-model="baseCurrency">
+          <option v-for="currency in currencies" :key="currency" :value="currency">{{ currency }}</option>
+        </select>
+
+        <label>Moeda de Destino:</label>
+        <select v-model="targetCurrency">
+          <option v-for="currency in currencies" :key="currency" :value="currency">{{ currency }}</option>
+        </select>
+
+        <p class="exchange-rate" v-if="exchangeRate">
+          1 {{ baseCurrency }} = {{ exchangeRate }} {{ targetCurrency }}
+        </p>
+        <p v-if="!exchangeRate">Carregando...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CDN do Vue.js -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+  <!-- CDN do Axios -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <!-- Arquivo JavaScript com Vue -->
+  <script src="App.js"></script>
+
+</body>
+</html>
