@@ -2,7 +2,7 @@ new Vue({
   el: '#app',
   data() {
     return {
-      message: 'Olá, Vue.js está funcionando!',
+     // message: 'Olá, Vue.js está funcionando!',
       exchangeRate: null,
       baseCurrency: 'USD',  // Moeda de origem padrão
       targetCurrency: 'EUR', // Moeda de destino padrão

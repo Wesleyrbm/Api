@@ -1,12 +1,35 @@
 /* style.css */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #fff;
     margin: 0;
     padding: 0;
   }
+
+  #menu {
+    display: flex;
+    justify-content: space-between; /* Distribui os itens horizontalmente */
+
+  }
   
-  /* index */
+  nav ul {
+    display: flex;
+    justify-content: space-around; /* Distribui os itens horizontalmente */
+    align-items: center; /* Alinha os itens verticalmente */
+    background-color: #5610b8; /* Cor de fundo */
+    padding: 15px 20px;
+    /*position: fixed; /* Mantém o menu fixo no topo */
+    width: 100%;
+    z-index: 1000; /* Garante que o menu fique sobre outros elementos */
+  }
+
+  nav ul li {
+    color: #ed0f0f; /* Cor do texto */
+    text-decoration: none; /* Remove o sublinhado */
+    position: center;
+  }
+
+
   section.home#inicio {
     background-color: #333;
     color: #fff;
@@ -51,13 +74,14 @@ section.home#inicio h1 {
     margin-top: 20px;
   }
   
-  .container {
+  .container { /* Aqui é a onde fica o conversor*/
     text-align: center;
     max-width: 400px;
     margin: auto;
-    font-family: Arial, sans-serif;
+   font-family: Arial, sans-serif;
+   background-color: #f4f4f4;
   }
-  
+
   input, select {
     margin: 10px;
     padding: 8px;
@@ -78,8 +102,10 @@ section.home#inicio h1 {
   }
   
   ul {
+  
     list-style: none;
     padding: 0;
+    background-color: #ed0f0f;
   }
   
   ul li {
