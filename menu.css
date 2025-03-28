@@ -1,0 +1,97 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #9cc4e4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Estilização do cabeçalho */
+  header {
+    background-color: #333;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+  }
+  
+  /* Estilização do menu */
+  .menu_lista {
+    display: flex;
+    justify-content: center;
+    background-color: #444;
+    padding: 10px 0;
+  }
+  
+  .menu_lista ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .menu_lista li {
+    padding: 10px;
+  }
+  
+  .menu_lista a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .menu_lista a:hover {
+    color: #f4a261;
+  }
+  
+  /* Seção principal */
+  .container {
+    text-align: center;
+    padding: 50px;
+  }
+  
+  /* Estilização do Conversor de Moedas */
+  .container.converter {
+    max-width: 400px;
+    margin: auto;
+    background-color: #d4f4e4;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  input, select {
+    margin: 10px 0;
+    padding: 8px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    margin-top: 20px;
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Rodapé fixo na parte inferior */
+  footer {
+    text-align: center;
+    background-color: #222;
+    color: white;
+    position: fixed;
+    width: 100%;
+    height: 50px;
+    bottom: 0;
+    line-height: 50px;
+  }
+  
