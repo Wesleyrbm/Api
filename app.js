@@ -1,63 +1,66 @@
 new Vue({
-  el: '#app',
-  data() {
-    return {
-     // message: 'Olá, Vue.js está funcionando!',
-      exchangeRate: null,
-      baseCurrency: 'USD',  // Moeda de origem padrão
-      targetCurrency: 'EUR', // Moeda de destino padrão
-      currencies: ['USD', 'EUR', 'GBP', 'JPY', 'BRL', 'CAD', 'AUD', 'CHF'], // Lista de moedas
-      status: 'Inativo'
-    };
+  el: "#app",
+  data: {
+    status: "Carregando...",
+    baseCurrency: "USD",
+    targetCurrency: "BRL",
+    currencies: ["USD", "EUR", "GBP", "JPY", "BRL", "CAD", "AUD", "CHF"],
+    exchangeRate: null,
+    chart: null, // Referência ao gráfico
+    rates: {} // Armazena todas as taxas de câmbio
   },
   mounted() {
-    this.fetchExchangeRate();  // Chama a API ao carregar a página
+    this.fetchExchangeRate();
+  },
+  watch: {
+    baseCurrency() {
+      this.fetchExchangeRate();
+    },
+    targetCurrency() {
+      this.fetchExchangeRate();
+    }
   },
   methods: {
     async fetchExchangeRate() {
       try {
         const response = await axios.get(`https://api.exchangerate-api.com/v4/latest/${this.baseCurrency}`);
-        this.exchangeRate = response.data.rates[this.targetCurrency];  
-        this.status = 'Ativo';  
+        this.rates = response.data.rates;
+        this.exchangeRate = this.rates[this.targetCurrency];
+        this.status = "Atualizado";
+        this.updateChart();
       } catch (error) {
-        console.error('Erro ao obter dados da API', error);
-        this.status = 'Inativo';  
+        console.error("Erro ao buscar taxa de câmbio", error);
+        this.status = "Erro na API";
       }
-    }
-  },
-  watch: {
-    baseCurrency() {
-      this.fetchExchangeRate();  // Atualiza a taxa sempre que a moeda de origem mudar
     },
-    targetCurrency() {
-      this.fetchExchangeRate();  // Atualiza a taxa sempre que a moeda de destino mudar
+    initChart() {
+      const ctx = document.getElementById("graficoMoedas").getContext("2d");
+      this.chart = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: this.currencies,
+          datasets: [
+            {
+              label: `Valor em relação ao ${this.baseCurrency}`,
+              data: [],
+              backgroundColor: [
+                "red", "blue", "green", "yellow", "purple", "orange", "pink", "cyan"
+              ]
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false
+        }
+      });
+    },
+    updateChart() {
+      if (!this.chart) {
+        this.initChart();
+      }
+      this.chart.data.datasets[0].data = this.currencies.map(currency => this.rates[currency] || 0);
+      this.chart.update();
     }
-  },
-  template: `
-    <div class="container">
-      <h1>{{ message }}</h1>
-      <h2>Conversor de Moedas</h2>
-      <p>Status: <strong>{{ status }}</strong></p>
-      
-      <!-- Selecione a moeda de origem -->
-      <label>Moeda de Origem:</label>
-      <select v-model="baseCurrency">
-        <option v-for="currency in currencies" :key="currency" :value="currency">{{ currency }}</option>
-      </select>
-      
-      <!-- Selecione a moeda de destino -->
-      <label>Moeda de Destino:</label>
-      <select v-model="targetCurrency">
-        <option v-for="currency in currencies" :key="currency" :value="currency">{{ currency }}</option>
-      </select>
-      
-      <!-- Exibindo a taxa de câmbio -->
-      <p class="exchange-rate" v-if="exchangeRate">
-        1 {{ baseCurrency }} = {{ exchangeRate }} {{ targetCurrency }}
-      </p>
-      <p v-if="!exchangeRate">Carregando...</p>
-    </div>
-  `
+  }
 });
-
-
