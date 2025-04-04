@@ -4,10 +4,12 @@ new Vue({
     status: "Carregando...",
     baseCurrency: "USD",
     targetCurrency: "BRL",
-    currencies: ["USD", "EUR", "GBP", "JPY", "BRL", "CAD", "AUD", "CHF"],
+    amount: 1,
+    convertedAmount: null,
     exchangeRate: null,
-    chart: null, // Referência ao gráfico
-    rates: {} // Armazena todas as taxas de câmbio
+    chart: null,
+    rates: {},
+    currencies: ["USD", "EUR", "GBP", "BRL", "CAD", "AUD", "CHF"]
   },
   mounted() {
     this.fetchExchangeRate();
@@ -59,6 +61,7 @@ new Vue({
       if (!this.chart) {
         this.initChart();
       }
+      this.chart.data.datasets[0].label = `Valor em relação ao ${this.baseCurrency}`;
       this.chart.data.datasets[0].data = this.currencies.map(currency => this.rates[currency] || 0);
       this.chart.update();
     }

@@ -1,9 +1,14 @@
-/* Reset básico */
+/* 🔄 Reset e base */
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: Arial, sans-serif;
   background-color: #9cc4e4;
   margin: 0;
   padding: 0;
+  color: #333;
 }
 
 /* 🔹 Cabeçalho */
@@ -12,6 +17,8 @@ header {
   color: #fff;
   padding: 15px;
   text-align: center;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 /* 🔹 Menu */
@@ -39,6 +46,7 @@ header {
   color: white;
   font-size: 18px;
   font-weight: bold;
+  transition: color 0.3s ease;
 }
 
 .menu_lista a:hover {
@@ -50,7 +58,7 @@ header {
   max-width: 600px;
   margin: auto;
   text-align: center;
-  padding: 50px;
+  padding: 50px 20px;
 }
 
 /* 🔹 Conversor de Moedas */
@@ -68,6 +76,7 @@ input, select {
   width: 100%;
   margin: 10px 0;
   padding: 8px;
+  font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
@@ -79,9 +88,11 @@ button {
   width: 100%;
   background-color: #4CAF50;
   color: white;
+  font-weight: bold;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
@@ -105,4 +116,17 @@ footer {
   height: 50px;
   bottom: 0;
   line-height: 50px;
+  font-size: 14px;
+}
+
+/* 🔹 Responsivo */
+@media (max-width: 600px) {
+  .menu_lista ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .container {
+    padding: 30px 15px;
+  }
 }

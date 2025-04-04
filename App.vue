@@ -24,19 +24,8 @@
       {{ amount }} {{ baseCurrency }} = <strong>{{ convertedAmount }}</strong> {{ targetCurrency }}
     </p>
 
-    <!-- Exibindo o histórico -->
-    <h3>Histórico de Conversões</h3>
-    <ul>
-      <li v-for="(entry, index) in history" :key="index">
-        {{ entry.amount }} {{ entry.base }} = {{ entry.converted }} {{ entry.target }}
-      </li>
-    </ul>
-
-    <!-- Limpar histórico -->
-    <button @click="clearHistory">Limpar Histórico</button>
-
     <!-- Gráfico de barras -->
-    <h3>Gráficos Financeiros</h3>
+    <h3>Gráfico Financeiro</h3>
     <canvas id="graficoMoedas"></canvas>
   </div>
 </template>
@@ -53,13 +42,12 @@ export default {
     const targetCurrency = ref("EUR");
     const convertedAmount = ref(null);
     const exchangeRate = ref(null);
-    const history = ref([]);
     const status = ref("Inativo");
     let chart = null;
 
-    const currencies = ["USD", "EUR", "GBP", "JPY", "BRL", "CAD", "AUD", "CHF"];
+    const currencies = ["USD", "EUR", "GBP", "BRL", "CAD", "AUD", "CHF"];
 
-    // Função para buscar taxa de câmbio
+    // Buscar taxa de câmbio
     const fetchExchangeRate = async () => {
       try {
         const response = await axios.get(`https://api.exchangerate-api.com/v4/latest/${baseCurrency.value}`);
@@ -73,23 +61,14 @@ export default {
       }
     };
 
-    // Função para converter moeda
+    // Converter moeda
     const convertCurrency = () => {
       if (exchangeRate.value && amount.value > 0) {
         convertedAmount.value = (amount.value * exchangeRate.value).toFixed(2);
-
-        // Adiciona ao histórico (mantendo só os últimos 5)
-        history.value.unshift({
-          amount: amount.value,
-          base: baseCurrency.value,
-          converted: convertedAmount.value,
-          target: targetCurrency.value
-        });
-        if (history.value.length > 5) history.value.pop();
       }
     };
 
-    // Função para inicializar o gráfico
+    // Inicializar gráfico
     const initChart = () => {
       const ctx = document.getElementById("graficoMoedas").getContext("2d");
       chart = new Chart(ctx, {
@@ -99,7 +78,7 @@ export default {
           datasets: [
             {
               label: "Valor da Moeda em relação ao USD",
-              data: [], // Dados iniciais vazios
+              data: [],
               backgroundColor: ["red", "blue", "green", "yellow", "purple", "orange", "pink", "cyan"]
             }
           ]
@@ -110,7 +89,7 @@ export default {
       });
     };
 
-    // Função para atualizar o gráfico
+    // Atualizar gráfico
     const updateChart = (rates) => {
       if (chart) {
         chart.data.datasets[0].data = currencies.map(currency => rates[currency] || 0);
@@ -118,18 +97,11 @@ export default {
       }
     };
 
-    // Limpar histórico
-    const clearHistory = () => {
-      history.value = [];
-    };
-
-    // Executar ao montar o componente
     onMounted(() => {
       fetchExchangeRate();
       initChart();
     });
 
-    // Atualiza sempre que a moeda base ou destino mudar
     watchEffect(() => {
       fetchExchangeRate();
     });
@@ -139,13 +111,10 @@ export default {
       baseCurrency,
       targetCurrency,
       convertedAmount,
-      exchangeRate,
       currencies,
-      history,
       status,
       fetchExchangeRate,
-      convertCurrency,
-      clearHistory
+      convertCurrency
     };
   }
 };
