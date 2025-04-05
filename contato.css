@@ -7,7 +7,7 @@ body {
   
   /* Estilização do cabeçalho */
   header {
-    background-color: #333; /* Fundo escuro para contraste */
+    background-color: #333; 
     color: #fff;
     padding: 15px;
     text-align: center;
@@ -41,7 +41,7 @@ body {
   }
   
   .menu_lista a:hover {
-    color: #f4a261; /* Cor destacada ao passar o mouse */
+    color: #f4a261; 
   }
   
   /* Seção principal */
